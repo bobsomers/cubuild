@@ -1,0 +1,12 @@
+# Generated code
+code.luac
+code.c
+
+# Built binary
+cubuild
+
+# Lua object files and binaries
+lua-5.1.4/src/*.o
+lua-5.1.4/src/lua
+lua-5.1.4/src/luac
+lua-5.1.4/src/liblua.a
