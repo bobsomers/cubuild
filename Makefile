@@ -26,7 +26,7 @@ all:
 	make -C $(LUA_DIR) posix
 	$(LUA_DIR)/src/luac -o code.luac $(LUA_SRCS)
 	$(LUA_DIR)/src/lua bin2c.lua -b -n script_code -o code.c code.luac
-	gcc -g -O2 -Wall -I$(LUA_DIR)/src -lm -o $(BIN) main.c $(LUA_DIR)/src/liblua.a
+	gcc -O2 -Wall -I$(LUA_DIR)/src -lm -o $(BIN) main.c $(LUA_DIR)/src/liblua.a
 	@echo "All done, $(BIN) has been built successfully."
 
 clean:
