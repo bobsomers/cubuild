@@ -17,7 +17,7 @@
 BIN = cubuild
 
 # List of the Lua source files.
-LUA_SRCS = cubuild.lua
+LUA_SRCS = src/cubuild.lua
 
 # Directory where the Lua source code lives.
 LUA_DIR = lua-5.1.4
