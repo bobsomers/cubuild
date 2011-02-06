@@ -8,8 +8,7 @@ It's written entirely in Lua, but compiles down to a single executable
 program (that compiles with gcc) that will run on any system, regardless of
 whether Lua is installed using some nifty embedded Lua tomfoolery.
 
-cubuild was written by Bob Somers for Dr. Lupo's Applied Parallel
-Programming course, CPE 458, at Cal Poly, San Luis Obispo.
+cubuild was written by [Bob Somers](http://bobsomers.com) for Dr. Lupo's Applied Parallel
+Programming course, CPE 458, at [Cal Poly, San Luis Obispo.](http://www.csc.calpoly.edu)
 
-It is released under the Beerware License.
-http://en.wikipedia.org/wiki/Beerware
+It is released under the [Beerware License](http://en.wikipedia.org/wiki/Beerware).
