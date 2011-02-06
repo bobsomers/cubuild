@@ -19,6 +19,9 @@ BIN = cubuild
 # List of the Lua source files.
 LUA_SRCS = src/cubuild.lua
 
+# Source files for Lua modules to build into the binary.
+MODULE_SRCS = modules/lfs.c
+
 # Directory where the Lua source code lives.
 LUA_DIR = lua-5.1.4
 
@@ -26,7 +29,7 @@ all:
 	make -C $(LUA_DIR) posix
 	$(LUA_DIR)/src/luac -o code.luac $(LUA_SRCS)
 	$(LUA_DIR)/src/lua bin2c.lua -b -n script_code -o code.c code.luac
-	gcc -O2 -Wall -I$(LUA_DIR)/src -lm -o $(BIN) main.c $(LUA_DIR)/src/liblua.a
+	gcc -O2 -Wall -I$(LUA_DIR)/src -Imodules -lm -o $(BIN) main.c $(MODULE_SRCS) $(LUA_DIR)/src/liblua.a
 	@echo "All done, $(BIN) has been built successfully."
 
 clean:

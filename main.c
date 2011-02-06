@@ -5,18 +5,21 @@
 #include "lualib.h"
 #include "lauxlib.h"
 
+#include "modules/lfs.h"
+
 #include "code.c"
 
 int main(int argc, char *argv[]) {
     int i = 0;
     lua_State *L = NULL;
     
-    // create lua state and args table
+    // create lua state and load libraries
     L = luaL_newstate();
     luaL_openlibs(L);
-    lua_newtable(L);
+    luaopen_lfs(L);
     
-    // fill args table
+    // create and fill args table
+    lua_newtable(L);
     for (i = 0; i < argc; i++) {
         lua_pushnumber(L, i);
         lua_pushstring(L, argv[i]);
