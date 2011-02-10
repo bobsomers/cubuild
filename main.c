@@ -6,6 +6,7 @@
 #include "lauxlib.h"
 
 #include "modules/lfs.h"
+#include "modules/LuaJSON_lib.h"
 
 #include "code.c"
 
@@ -17,6 +18,7 @@ int main(int argc, char *argv[]) {
     L = luaL_newstate();
     luaL_openlibs(L);
     luaopen_lfs(L);
+    luaopen_LuaJSON_lib(L);
     
     // create and fill args table
     lua_newtable(L);

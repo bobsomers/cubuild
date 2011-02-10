@@ -20,7 +20,7 @@ BIN = cubuild
 LUA_SRCS = src/cubuild.lua
 
 # Source files for Lua modules to build into the binary.
-MODULE_SRCS = modules/lfs.c
+MODULE_SRCS = modules/lfs.c modules/LuaJSON_lib.c
 
 # Directory where the Lua source code lives.
 LUA_DIR = lua-5.1.4
