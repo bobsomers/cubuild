@@ -1,0 +1,19 @@
+{
+    "default": "debug",
+
+    "debug": {
+        "target": "lab1D",
+        "debug": true,
+        "optimizer": false,
+        "defines": ["DEBUG"],
+        "flags": ["Wall"]
+    },
+    
+    "release": {
+        "target": "lab1",
+        "debug": false,
+        "optimizer": true,
+        "defines": ["NDEBUG", "RELEASE"],
+        "flags": ["Wall"]
+    }
+}
