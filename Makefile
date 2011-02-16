@@ -26,13 +26,38 @@ MODULE_SRCS = modules/lfs.c modules/LuaJSON_lib.c
 LUA_DIR = lua-5.1.4
 
 all:
+	@echo "======================================================================"
+	@echo "        Building Lua from source..."
+	@echo "======================================================================"
 	make -C $(LUA_DIR) posix
+	@echo ""
+	@echo "======================================================================"
+	@echo "        Compiling Lua scripts to bytecode..."
+	@echo "======================================================================"
 	$(LUA_DIR)/src/luac -o code.luac $(LUA_SRCS)
 	$(LUA_DIR)/src/lua bin2c.lua -b -n script_code -o code.c code.luac
+	@echo ""
+	@echo "======================================================================"
+	@echo "        Building wrapper executable..."
+	@echo "======================================================================"
 	gcc -O2 -Wall -I$(LUA_DIR)/src -Imodules -lm -o $(BIN) main.c $(MODULE_SRCS) $(LUA_DIR)/src/liblua.a
-	@echo "All done, $(BIN) has been built successfully."
+	@echo ""
+	@echo "======================================================================"
+	@echo "        All done, $(BIN) has been built successfully."
+	@echo "======================================================================"
 
 clean:
+	@echo "======================================================================"
+	@echo "        Cleaning Lua source..."
+	@echo "======================================================================"
 	make -C $(LUA_DIR) clean
+	@echo ""
+	@echo "======================================================================"
+	@echo "        Removing generated code and binaries..."
+	@echo "======================================================================"
 	rm -f code.luac code.c $(BIN)
-	@echo "Clean complete."
+	@echo ""
+	@echo "======================================================================"
+	@echo "        Clean complete."
+	@echo "======================================================================"
+
