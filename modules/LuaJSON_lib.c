@@ -93,7 +93,7 @@ unsigned int fourhex2int(lua_State *L, const char * code)
 static const char* code2utf8(lua_State *L, const unsigned char * code, char buf[4])
 {
     unsigned int utf = 0;
-    utf = fourhex2int(L, code);
+    utf = fourhex2int(L, (const char *)code);
     if (utf < 128)
     {
         buf[0] = utf & 0x7F;
@@ -465,7 +465,7 @@ void readString(lua_State *L, char * str, char ** c)
                 (*c) += 2;
                 break;
             case 'u':
-                code2utf8(L, (*c) + 2, utfbuf);
+                code2utf8(L, (const unsigned char *)((*c) + 2), utfbuf);
                 size_t len = strlen(utfbuf);
                 strcpy(newc, utfbuf);
                 newc += len;
@@ -891,7 +891,7 @@ void stringify(lua_State *L, luaL_Buffer *StringBuf)
     }
     else if (lua_isstring(L, -1))
     {
-        int len;
+        size_t len;
         const char * s = lua_tolstring(L, -1, &len);    // -0 +0
         stringifyString(L, s, len, StringBuf);  // -0 +0
     }
