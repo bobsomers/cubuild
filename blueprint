@@ -3,16 +3,27 @@
 
     "debug": {
         "target": "lab1D",
-        "debug": true,
-        "optimizer": false,
+        "debugging": true,
+        "profiling": false,
+        "optimizing": false,
         "defines": ["DEBUG"],
         "flags": ["Wall"]
     },
-    
+
+    "profile": {
+        "target": "lab1",
+        "debugging": true,
+        "profiling": true,
+        "optimizing": true,
+        "defines": ["DEBUG"],
+        "flags": ["Wall"]
+    },
+
     "release": {
         "target": "lab1",
-        "debug": false,
-        "optimizer": true,
+        "debugging": false,
+        "profiling": false,
+        "optimizing": true,
         "defines": ["NDEBUG", "RELEASE"],
         "flags": ["Wall"]
     }
