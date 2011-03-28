@@ -32,11 +32,14 @@ end
 
 print("Starting build of '" .. chosen_config .. "'.")
 
+-- descend into all subdirectories to get the list of source files
+local files = get_source_files(lfs.currentdir())
 
-
-
-
-
+-- TODO: remove me!
+for _, v in ipairs(files) do
+    print("Found file: " .. v)
+    print("\t" .. get_object_file(v))
+end
 
 
 -- dump out everything
