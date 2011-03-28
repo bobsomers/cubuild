@@ -1,3 +1,76 @@
+-- function definitions for blueprint primitives
+function gpu_sdk_path(path)
+    print("Called gpu_sdk_path with " .. path)
+end
+
+function default(which)
+    print("Called default with " .. which)
+end
+
+function config(name)
+    print("Called config with " .. name)
+end
+
+function target(name)
+    print("Called target with " .. name)
+end
+
+function debugging(debug)
+    if debug == "on" then
+        print("Debugging turned on.")
+    else
+        print("Debugging turned off.")
+    end
+end
+
+function profiling(profile)
+    if profile == "on" then
+        print("Profiling turned on.")
+    else
+        print("Profiling turned off.")
+    end
+end
+
+function optimizing(optimize)
+    if optimize == "on" then
+        print("Optimizing turned on.")
+    else
+        print("Optimizing turned off.")
+    end
+end
+
+function defines(defs)
+    print("Called defines with:")
+    for _, v in ipairs(defs) do
+        print("\t" .. v)
+    end
+end
+
+function flags(opts)
+    print("Called flags with:")
+    for _, v in ipairs(opts) do
+        print("\t" .. v)
+    end
+end
+
+-- load the blueprint
+local blueprint = assert(loadfile(lfs.currentdir() .. "/blueprint.lua"))
+blueprint()
+
+-- all done
+print("Done.")
+
+
+
+
+
+
+
+
+
+
+--[[
+
 -- create live and build loggers
 local livelog = logging.console("[%level] %message\n")
 local buildlog = logging.file("cubuild.log")
@@ -7,7 +80,7 @@ local fh = io.open(lfs.currentdir() .. "/blueprint")
 if fh == nil then
     livelog:fatal("Couldn't open your blueprint file. Does it exist?")
     return
-end
+end 
 local blueprint = json.decode(fh:read("*a"))
 fh:close()
 
@@ -49,3 +122,5 @@ end
 
 livelog:info("You asked me to build config '" .. config .. "'")
 livelog:info("Done.")
+
+--]]
