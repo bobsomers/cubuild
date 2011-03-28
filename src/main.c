@@ -6,7 +6,6 @@
 #include "lauxlib.h"
 
 #include "luafilesystem-1.5.0/lfs.h"
-#include "lpeg-0.10.2/lpeg.h"
 
 #include "code.c"
 
@@ -18,7 +17,6 @@ int main(int argc, char *argv[]) {
     L = luaL_newstate();
     luaL_openlibs(L);
     luaopen_lfs(L);
-    luaopen_lpeg(L);
     
     // create and fill args table
     lua_newtable(L);

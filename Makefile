@@ -26,37 +26,13 @@ TOOLS_DIR = tools
 GEN_DIR = gen
 
 # List of the Lua source files.
-LUA_SRCS = src/lualogging-1.1.4/logging.lua \
-		   src/lualogging-1.1.4/console.lua \
-		   src/lualogging-1.1.4/file.lua \
-		   src/luajson-1.2.1/json.lua \
-		   src/luajson-1.2.1/json/util.lua \
-		   src/luajson-1.2.1/json/decode.lua \
-		   src/luajson-1.2.1/json/encode.lua \
-		   src/luajson-1.2.1/json/decode/array.lua \
-		   src/luajson-1.2.1/json/decode/calls.lua \
-		   src/luajson-1.2.1/json/decode/number.lua \
-		   src/luajson-1.2.1/json/decode/object.lua \
-		   src/luajson-1.2.1/json/decode/others.lua \
-		   src/luajson-1.2.1/json/decode/strings.lua \
-		   src/luajson-1.2.1/json/decode/util.lua \
-		   src/luajson-1.2.1/json/encode/array.lua \
-		   src/luajson-1.2.1/json/encode/calls.lua \
-		   src/luajson-1.2.1/json/encode/number.lua \
-		   src/luajson-1.2.1/json/encode/object.lua \
-		   src/luajson-1.2.1/json/encode/others.lua \
-		   src/luajson-1.2.1/json/encode/output.lua \
-		   src/luajson-1.2.1/json/encode/output_utility.lua \
-		   src/luajson-1.2.1/json/encode/strings.lua \
-		   src/luajson-1.2.1/json.lua \
-		   src/cubuild.lua
+LUA_SRCS = $(SRC_DIR)/cubuild.lua
 
 # Source files for Lua modules to build into the binary.
-MODULE_SRCS = src/luafilesystem-1.5.0/lfs.c \
-			  src/lpeg-0.10.2/lpeg.c
+MODULE_SRCS = $(SRC_DIR)/luafilesystem-1.5.0/lfs.c
 
 # Directory where the Lua source code lives.
-LUA_DIR = src/lua-5.1.4
+LUA_DIR = $(SRC_DIR)/lua-5.1.4
 
 all:
 	@echo "======================================================================"
@@ -73,7 +49,7 @@ all:
 	@echo "======================================================================"
 	@echo "        Building wrapper executable..."
 	@echo "======================================================================"
-	gcc -O2 -Wall -I$(LUA_DIR)/src -Isrc -I$(GEN_DIR) -lm -o $(BIN) src/main.c $(MODULE_SRCS) $(LUA_DIR)/src/liblua.a
+	gcc -O2 -Wall -I$(LUA_DIR)/src -I$(SRC_DIR) -I$(GEN_DIR) -lm -o $(BIN) $(SRC_DIR)/main.c $(MODULE_SRCS) $(LUA_DIR)/src/liblua.a
 	@echo ""
 	@echo "======================================================================"
 	@echo "        All done, $(BIN) has been built successfully."
