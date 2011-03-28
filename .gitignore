@@ -1,5 +1,5 @@
 # binary
 cubuild
 
-# build log
-cubuild.log
+# vim swap files
+*.swp
