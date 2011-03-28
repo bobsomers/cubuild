@@ -9,27 +9,29 @@ default "debug"
 
 -- The debug build configuration.
 config "debug"
-    target "build-debug"
+    output "build-debug"
     debugging "on"
     profiling "off"
     optimizing "off"
     defines {"DEBUG"}
-    flags {"Wall"}
 
 -- The profiling build configuration.
 config "profile"
-    target "build-profile"
+    output "build-profile"
     debugging "on"
     profiling "on"
     optimizing "on"
     defines {"DEBUG"}
-    flags {"Wall"}
 
 -- The release build configuration.
 config "release"
-    target "build-release"
+    output "build-release"
     debugging "off"
     profiling "off"
     optimizing "on"
     defines {"NDEBUG", "RELEASE"}
-    flags {"Wall"}
+    includes {"my/special/incs", "your/incs"}
+    cflags {"-Wall", "-ffast_math"}
+    libdirs {"my/libs", "your/libs"}
+    libs {"m", "boost_regex"}
+    lflags {"-m64"}

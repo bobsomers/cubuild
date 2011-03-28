@@ -26,7 +26,11 @@ TOOLS_DIR = tools
 GEN_DIR = gen
 
 # List of the Lua source files.
-LUA_SRCS = $(SRC_DIR)/cubuild.lua
+LUA_SRCS = $(SRC_DIR)/globals.lua \
+		   $(GEN_DIR)/build_info.lua \
+		   $(SRC_DIR)/cmd_args.lua \
+		   $(SRC_DIR)/primitives.lua \
+		   $(SRC_DIR)/cubuild.lua
 
 # Source files for Lua modules to build into the binary.
 MODULE_SRCS = $(SRC_DIR)/luafilesystem-1.5.0/lfs.c
@@ -35,6 +39,22 @@ MODULE_SRCS = $(SRC_DIR)/luafilesystem-1.5.0/lfs.c
 LUA_DIR = $(SRC_DIR)/lua-5.1.4
 
 all:
+	@echo "======================================================================"
+	@echo "        Generating build info..."
+	@echo "======================================================================"
+	echo "BUILD_DATE = [[" > $(GEN_DIR)/build_info.lua
+	date >> $(GEN_DIR)/build_info.lua
+	echo "]]" >> $(GEN_DIR)/build_info.lua
+	echo "BUILD_MACHINE = [[" >> $(GEN_DIR)/build_info.lua
+	hostname -s >> $(GEN_DIR)/build_info.lua
+	echo "]]" >> $(GEN_DIR)/build_info.lua
+	echo "BUILD_ARCH = [[" >> $(GEN_DIR)/build_info.lua
+	uname -i >> $(GEN_DIR)/build_info.lua
+	echo "]]" >> $(GEN_DIR)/build_info.lua
+	echo "GIT_COMMIT = [[" >> $(GEN_DIR)/build_info.lua
+	git rev-parse HEAD >> $(GEN_DIR)/build_info.lua
+	echo "]]" >> $(GEN_DIR)/build_info.lua
+	@echo ""
 	@echo "======================================================================"
 	@echo "        Building Lua from source..."
 	@echo "======================================================================"
