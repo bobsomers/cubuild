@@ -5,7 +5,9 @@ function trim(s)
 end
 
 function handle_cmd_arg(arg)
-    if arg == "version" or arg == "v" then
+    if arg == "verbose" then
+        show_commands = true
+    elseif arg == "version" then
         print("cubuild v" .. VERSION .. " (Beerware License)")
         print("Built by " .. trim(BUILD_MACHINE) .. "/" .. trim(BUILD_ARCH) .. " on " .. trim(BUILD_DATE))
         print("from Git commit " .. trim(GIT_COMMIT))

@@ -7,6 +7,7 @@ configs = {}
 current_config = ""
 default_config = ""
 chosen_config = "default"
+show_commands = false
 
 -- exit with an error
 function kaboom(msg)

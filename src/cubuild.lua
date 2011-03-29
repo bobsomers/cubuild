@@ -67,7 +67,11 @@ for _, v in ipairs(files) do
     cmd = table.concat {cmd, " ", v}
 
     -- tell the user what we're doing
-    print(table.concat {"Compiling ",  get_relative_path(v)})
+    if show_commands then
+        print(cmd)
+    else
+        print(table.concat {"Compiling ",  get_relative_path(v)})
+    end
 
     -- do the compilation
     os.execute(cmd)
@@ -100,7 +104,11 @@ for _, v in ipairs(files) do
 end
 
 -- tell the user what's going on
-print(table.concat {"Linking ", configs[chosen_config].output})
+if show_commands then
+    print(cmd)
+else
+    print(table.concat {"Linking ", configs[chosen_config].output})
+end
 
 -- do the linking stage
 os.execute(cmd)
