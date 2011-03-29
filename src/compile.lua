@@ -7,6 +7,21 @@ function compile(files)
         -- compile to object file
         cmd = table.concat {cmd, " -c"}
 
+        -- debugging?
+        if configs[chosen_config].debugging then
+            cmd = table.concat {cmd, " -g -G"}
+        end
+        
+        -- profiling?
+        if configs[chosen_config].profiling then
+            cmd = table.concat {cmd, " -pg"}
+        end
+        
+        -- optimizing?
+        if configs[chosen_config].optimizing then
+            cmd = table.concat {cmd, " -O3"}
+        end
+
         -- defines
         for _, val in ipairs(configs[chosen_config].defines) do
             cmd = table.concat {cmd, " -D", val}
