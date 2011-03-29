@@ -42,7 +42,8 @@ function config(name)
             libdirs = {},
             libs = {},
             lflags = {},
-            compute_capability = "1.0"
+            compute_capability = "1.0",
+            max_registers = ""
         }
     end
 
@@ -141,4 +142,10 @@ function compute_capability(cap)
     else
         kaboom("Unknown compute capability in config " .. current_config .. ", expected 1.0, 1.1, 1.2, 1.3, or 2.0.")
     end
+end
+
+-- set max register usage for CUDA kernels
+function max_registers(regs)
+    check_inside_config()
+    configs[current_config].max_registers = regs
 end

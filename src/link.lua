@@ -3,6 +3,11 @@
 function link(files)
     local cmd = "nvcc"
 
+    -- profiling?
+    if configs[chosen_config].profiling then
+        cmd = table.concat {cmd, " -pg"}
+    end
+
     -- library directories
     for _, val in ipairs(configs[chosen_config].libdirs) do
         cmd = table.concat {cmd, " -L", val}

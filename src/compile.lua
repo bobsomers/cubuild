@@ -39,6 +39,11 @@ function compile(files)
         elseif configs[chosen_config].compute_capability == "2.0" then
             cmd = table.concat {cmd, " -arch=compute_20 -code=sm_20"}
         end
+        
+        -- set the maximum number of CUDA registers per kernel (if specified)
+        if configs[chosen_config].max_registers ~= "" then
+            cmd = table.concat {cmd, " -maxrregcount=", configs[chosen_config].max_registers}
+        end
 
         -- defines
         for _, val in ipairs(configs[chosen_config].defines) do
