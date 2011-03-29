@@ -21,6 +21,24 @@ function compile(files)
         if configs[chosen_config].optimizing then
             cmd = table.concat {cmd, " -O3"}
         end
+        
+        -- force verbose information from the CUDA compiler for register
+        -- and shared memory usage info
+        cmd = table.concat {cmd, " -Xptxas -v"}
+        
+        -- set the virtual architecture and specific architecture that we're
+        -- compiling for
+        if configs[chosen_config].compute_capability == "1.0" then
+            cmd = table.concat {cmd, " -arch=compute_10 -code=sm_10"}
+        elseif configs[chosen_config].compute_capability == "1.1" then
+            cmd = table.concat {cmd, " -arch=compute_11 -code=sm_11"}
+        elseif configs[chosen_config].compute_capability == "1.2" then
+            cmd = table.concat {cmd, " -arch=compute_12 -code=sm_12"}
+        elseif configs[chosen_config].compute_capability == "1.3" then
+            cmd = table.concat {cmd, " -arch=compute_13 -code=sm_13"}
+        elseif configs[chosen_config].compute_capability == "2.0" then
+            cmd = table.concat {cmd, " -arch=compute_20 -code=sm_20"}
+        end
 
         -- defines
         for _, val in ipairs(configs[chosen_config].defines) do
