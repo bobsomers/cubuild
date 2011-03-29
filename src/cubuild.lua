@@ -30,60 +30,80 @@ if configs[chosen_config] == nil then
     kaboom("Config '" .. chosen_config .. "' is not defined in your blueprint!")
 end
 
-print("Starting build of '" .. chosen_config .. "'.")
+print("Starting build: " .. chosen_config)
 
 -- descend into all subdirectories to get the list of source files
 local files = get_source_files(lfs.currentdir())
 
--- TODO: remove me!
+-- compile all the files
 for _, v in ipairs(files) do
-    print("Found file: " .. v)
-    print("\t" .. get_object_file(v))
+    local cmd = "nvcc"
+
+    -- compile to object file
+    cmd = table.concat {cmd, " -c"}
+
+    -- defines
+    for _, val in ipairs(configs[chosen_config].defines) do
+        cmd = table.concat {cmd, " -D", val}
+    end
+
+    -- gpu computing sdk include
+    cmd = table.concat {cmd, " -I", sdk_path, "/C/common/inc"}
+
+    -- other includes
+    for _, val in ipairs(configs[chosen_config].includes) do
+        cmd = table.concat {cmd, " -I", val}
+    end
+
+    -- compiler flags
+    for _, val in ipairs(configs[chosen_config].cflags) do
+        cmd = table.concat {cmd, " -Xcompiler ", val}
+    end
+
+    -- output file name
+    cmd = table.concat {cmd, " -o ", get_object_file(v)}
+
+    -- input source file
+    cmd = table.concat {cmd, " ", v}
+
+    -- tell the user what we're doing
+    print(table.concat {"Compiling ",  get_relative_path(v)})
+
+    -- do the compilation
+    os.execute(cmd)
 end
 
+-- linking stage
+local cmd = "nvcc"
 
--- dump out everything
---[[
-print("SDK Path: " .. sdk_path)
-print("Default Config: " .. default_config)
-for k, v in pairs(configs) do
-    print("Config: " .. k)
-    print("\tOutput: " .. v.output)
-    if v.debugging then print("\tDebugging: On") else print("\tDebugging: Off") end
-    if v.profiling then print("\tProfiling: On") else print("\tProfiling: Off") end
-    if v.optimizing then print("\tOptimizing: On") else print("\tOptimizing: Off") end
-    
-    print("\tDefines:")
-    for _, val in ipairs(v.defines) do
-        print("\t\t" .. val)
-    end
-    
-    print("\tIncludes:")
-    for _, val in ipairs(v.includes) do
-        print("\t\t" .. val)
-    end
-    
-    print("\tCompile Flags:")
-    for _, val in ipairs(v.cflags) do
-        print("\t\t" .. val)
-    end
-    
-    print("\tLib Dirs:")
-    for _, val in ipairs(v.libdirs) do
-        print("\t\t" .. val)
-    end
-    
-    print("\tLibs:")
-    for _, val in ipairs(v.libs) do
-        print("\t\t" .. val)
-    end
-    
-    print("\tLink Flags:")
-    for _, val in ipairs(v.lflags) do
-        print("\t\t" .. val)
-    end
+-- library directories
+for _, val in ipairs(configs[chosen_config].libdirs) do
+    cmd = table.concat {cmd, " -L", val}
 end
---]]
+
+-- libraries
+for _, val in ipairs(configs[chosen_config].libs) do
+    cmd = table.concat {cmd, " -l", val}
+end
+
+-- linker flags
+for _, val in ipairs(configs[chosen_config].lflags) do
+    cmd = table.concat {cmd, " -Xlinker ", val}
+end
+
+-- output executable name
+cmd = table.concat {cmd, " -o ", configs[chosen_config].output}
+
+-- object files
+for _, v in ipairs(files) do
+    cmd = table.concat {cmd, " ", get_object_file(v)}
+end
+
+-- tell the user what's going on
+print(table.concat {"Linking ", configs[chosen_config].output})
+
+-- do the linking stage
+os.execute(cmd)
 
 -- all done
 print("Done.")
