@@ -26,20 +26,20 @@ if chosen_config == "default" then
 end
 
 -- check that the chosen config exists
-if configs[chosen_config] == nil then
+if configs[chosen_config] == nil and chosen_config ~= "clean" then
     kaboom("Config '" .. chosen_config .. "' is not defined in your blueprint!")
 end
 
-print("Starting build: " .. chosen_config)
-
--- descend into all subdirectories to get the list of source files
+-- either build or clean, based on the chosen config
 local files = get_source_files(lfs.currentdir())
-
--- compile the files
-compile(files)
-
--- link the files
-link(files)
+if chosen_config == "clean" then
+    print("Starting clean")
+    clean(files)
+else
+    print("Starting build: " .. chosen_config)
+    compile(files)
+    link(files)
+end
 
 -- all done
 print("Done.")
