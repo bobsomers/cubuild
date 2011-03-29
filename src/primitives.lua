@@ -26,6 +26,10 @@ function config(name)
         kaboom("You can't name a config 'default'.")
     end
 
+    if name == "clean" then
+        kaboom("You can't name a config 'clean'.")
+    end
+
     if configs[name] == nil then
         configs[name] = {
             output = "a.out",

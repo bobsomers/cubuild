@@ -31,6 +31,8 @@ LUA_SRCS = $(SRC_DIR)/globals.lua \
 		   $(SRC_DIR)/cmd_args.lua \
 		   $(SRC_DIR)/primitives.lua \
 		   $(SRC_DIR)/files.lua \
+		   $(SRC_DIR)/compile.lua \
+		   $(SRC_DIR)/link.lua \
 		   $(SRC_DIR)/cubuild.lua
 
 # Source files for Lua modules to build into the binary.
