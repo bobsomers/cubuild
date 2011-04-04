@@ -19,7 +19,7 @@ function compile(files)
         
         -- optimizing?
         if configs[chosen_config].optimizing then
-            cmd = table.concat {cmd, " -O3"}
+            cmd = table.concat {cmd, " -O2"}
         end
         
         -- force verbose information from the CUDA compiler for register
