@@ -77,7 +77,7 @@ For example, this is the output when running cubuild on the included example:
 
 This compiled 3 source files (a C file, a C++ file, and a CUDA file) into a single executable
 called build-release. In particular, you'll notice that when it compiled the `add()` CUDA
-kernel, it printed some information about register and shared memory usage. This will be
+kernel, it printed some information about register and constant/shared memory usage. This will be
 helpful later when playing with your thread/block launch sizes.
 
 There are currently 2 command line options, `-version` and `-verbose`. The version flag will
@@ -121,7 +121,7 @@ for profiling, and a final release build with everything stripped out and the op
 cranked up.
 
 You can invoke different configurations in your `blueprint.lua` by passing them along at
-the command line:
+the command line, just like invoking a specific target with `make`:
 
     [bsomers@helo] > ./cubuild debug
     Starting build: debug
