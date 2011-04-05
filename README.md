@@ -245,4 +245,12 @@ full listing of everything supported as of the most recent release.
 
 ### Global Blueprint Options
 
+* **gpu_sdk_path "/opt/NVIDIA_GPU_Computing_SDK"** The path to wherever you have the GPU Computing SDK
+installed. On the lab machines it's at the path listed here.
+* **default "some_config"** The default config to build if you don't specify a config explicitly on the
+command line when you run cubuild.
+* **config "my_config"** Defines a new build config named *my_config*. All config-specific options from
+here out apply to this config until either you switch to a different config or the end of the blueprint
+is reached.
+
 ### Build Config Blueprint Options
