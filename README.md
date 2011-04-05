@@ -247,7 +247,7 @@ Displays information about the versions of cubuild, nvcc, gcc, and g++ on your s
 
 ### Global Blueprint Options
 
-* **gpu_sdk_path "/opt/NVIDIA_GPU_Computing_SDK"**  
+* **gpu_sdk_path "/opt/NVIDIA\_GPU\_Computing\_SDK"**  
 The path to wherever you have the GPU Computing SDK
 installed. On the lab machines it's at the path listed here.
 * **default "some_config"**  
