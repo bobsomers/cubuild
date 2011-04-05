@@ -254,7 +254,7 @@ installed. On the lab machines it's at the path listed here.
 The default config to build if you don't specify a config explicitly on the
 command line when you run cubuild.
 * **config "my\_config"**  
-Defines a new build config named *my_config*. All config-specific options from
+Defines a new build config named *my\_config*. All config-specific options from
 here out apply to this config until either you switch to a different config or the end of the blueprint
 is reached.
 
