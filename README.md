@@ -192,3 +192,57 @@ the command line, just like invoking a specific target with `make`:
 
 As you can tell from the first line of cubuild output, we're building the "debug" configuration
 from our blueprint.
+
+Let's make a simple blueprint that has the three configurations we mentioned above, one for
+debugging, one for profiling, and one for final release.
+
+    gpu_sdk_path "/opt/NVIDIA_GPU_Computing_SDK"
+    
+    default "debug"
+    
+    config "debug"
+        output "my_prog-debug"
+        debugging "on"
+    
+    config "profile"
+        output "my_prog-profile"
+        debugging "on"
+        profiling "on"
+    
+    config "release"
+        output "my_prog-release"
+        optimizing "on"
+
+You can see we've defined three configs, named "debug", "profile", and "release". We've also
+given their output executables different names as well so there's never any confusion. Lastly,
+you can see that we didn't have to fuss with any pesky command line options to build things
+correctly. Just turn on debugging, profiling, or optimizing and cubuild will handle the details.
+
+Note that we also turned on debugging in our profiling build so we export the debugging symbols
+like function and variable names. This is important for getting meaningful results when you
+profile your code.
+
+## That's All Folks!
+
+Using cubuild is really as simple as that. If you have any questions, feel free to send them
+my way, or preferably send them to the [class mailing list](http://groups.google.com/group/cpe458-s11)
+so everyone gets the benefit of your question being answered.
+
+Is cubuild missing a feature that you need or want? Send it out to the mailing list and if I
+have some free time I'm happy to try to add whatever missing features you like. And since cubuild
+is open source under the [Beerware License](http://en.wikipedia.org/wiki/Beerware), if you hate
+everything I've done feel free to fork the project and send patches my way!
+
+## The Kitchen Sink
+
+There are several additional features supported by cubuild that we didn't mention here. This is a
+full listing of everything supported as of the most recent release.
+
+### Command Line Options
+
+* **-verbose** Show the actual commands cubuild is running rather than the user friendly versions.
+* **-version** Displays information about the versions of cubuild, nvcc, gcc, and g++ on your system.
+
+### Global Blueprint Options
+
+### Build Config Blueprint Options
