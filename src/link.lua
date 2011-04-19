@@ -8,10 +8,16 @@ function link(files)
         cmd = table.concat {cmd, " -pg"}
     end
 
+    -- gpu computing sdk libdir
+    cmd = table.concat {cmd, " -L", sdk_path, "/C/lib"}
+
     -- library directories
     for _, val in ipairs(configs[chosen_config].libdirs) do
         cmd = table.concat {cmd, " -L", val}
     end
+
+    -- gpu computing sdk cutil library
+    cmd = table.concat {cmd, " -lcutil_x86_64"}
 
     -- libraries
     for _, val in ipairs(configs[chosen_config].libs) do
