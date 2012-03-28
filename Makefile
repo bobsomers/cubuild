@@ -50,10 +50,10 @@ all:
 	date >> $(GEN_DIR)/build_info.lua
 	echo "]]" >> $(GEN_DIR)/build_info.lua
 	echo "BUILD_MACHINE = [[" >> $(GEN_DIR)/build_info.lua
-	hostname -s >> $(GEN_DIR)/build_info.lua
+	uname -n >> $(GEN_DIR)/build_info.lua
 	echo "]]" >> $(GEN_DIR)/build_info.lua
 	echo "BUILD_ARCH = [[" >> $(GEN_DIR)/build_info.lua
-	uname -i >> $(GEN_DIR)/build_info.lua
+	uname -m >> $(GEN_DIR)/build_info.lua
 	echo "]]" >> $(GEN_DIR)/build_info.lua
 	echo "GIT_COMMIT = [[" >> $(GEN_DIR)/build_info.lua
 	git rev-parse HEAD >> $(GEN_DIR)/build_info.lua
