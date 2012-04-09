@@ -9,7 +9,7 @@ It's written entirely in Lua, but compiles down to a single executable program
 Lua is installed using some nifty embedded Lua tomfoolery.
 
 cubuild was written by [Bob Somers](http://bobsomers.com) for Dr. Lupo's [Applied Parallel
-Computing](http://users.csc.calpoly.edu/~clupo/teaching/458/spring11/) course, CPE 458, at
+Computing](http://users.csc.calpoly.edu/~clupo/teaching/458/spring12/) course, CPE 458, at
 [Cal Poly, San Luis Obispo](http://www.csc.calpoly.edu).
 
 It is released under the [Beerware License](http://en.wikipedia.org/wiki/Beerware).
