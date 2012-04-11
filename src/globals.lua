@@ -1,5 +1,5 @@
 -- constants (well, actually just variables you should not write to...)
-VERSION = "0.2"
+VERSION = "0.3"
 
 -- global state
 sdk_path = ""
